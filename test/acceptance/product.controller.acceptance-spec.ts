@@ -2,8 +2,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ProductModule } from "../../src/interface/modules/product.module";
-import { ProductOrmEntity } from "../../src/infrastructure/persistence/entities/product.orm-entity";
+import { ProductModule } from "../../src/modules/products/interface/modules/product.module";
+import { ProductOrmEntity } from "../../src/modules/products/infrastructure/persistence/entities/product.orm-entity";
 
 describe("ProductController (e2e)", () => {
   let app: INestApplication;
