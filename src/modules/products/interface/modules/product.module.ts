@@ -5,7 +5,12 @@ import { ProductRepositoryImpl } from "../../infrastructure/persistence/reposito
 import { CreateProductUseCase } from "../../core/application/use-cases/create-product.usecase";
 import { ProductService } from "../../application/services/product.service";
 import { ProductController } from "../controllers/product.controller";
-import { PRODUCT_REPOSITORY } from "src/config/constants/repositories.constants";
+import {
+  CREATE_PRODUCT_USE_CASE,
+  PRODUCT_REPOSITORY,
+  UPDATE_PRODUCT_USE_CASE,
+} from "../../../../config/constants/repositories.constants";
+import { UpdateProductUseCase } from "../../core/application/use-cases/update-product.usecase";
 
 @Module({
   imports: [],
@@ -18,15 +23,24 @@ export class ProductModule {
       controllers: [ProductController],
       providers: [
         {
-          inject: [ProductRepositoryImpl],
-          provide: PRODUCT_REPOSITORY,
+          inject: [PRODUCT_REPOSITORY],
+          provide: CREATE_PRODUCT_USE_CASE,
           useFactory: (repository: ProductRepositoryImpl) =>
             new CreateProductUseCase(repository),
         },
-        ProductRepositoryImpl,
+        {
+          inject: [PRODUCT_REPOSITORY],
+          provide: UPDATE_PRODUCT_USE_CASE,
+          useFactory: (repository: ProductRepositoryImpl) =>
+            new UpdateProductUseCase(repository),
+        },
+        {
+          provide: PRODUCT_REPOSITORY,
+          useClass: ProductRepositoryImpl,
+        },
         ProductService,
       ],
-      exports: [PRODUCT_REPOSITORY],
+      exports: [ProductService],
     };
   }
 }

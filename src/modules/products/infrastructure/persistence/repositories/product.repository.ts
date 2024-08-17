@@ -53,12 +53,12 @@ export class ProductRepositoryImpl implements ProductRepository {
     );
   }
 
-  async update(product: Product): Promise<Product> {
-    await this.repository.update(product.id, product);
+  async update(id: string, product: Product): Promise<Product> {
+    await this.repository.update(id, product);
     return product;
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.repository.delete(id);
   }
 }

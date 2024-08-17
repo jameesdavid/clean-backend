@@ -18,21 +18,22 @@ describe("CreateProductUseCase", () => {
   });
 
   it("should create a new product", async () => {
+    const inputData = {
+      name: "Product 1",
+      description: "Description 1",
+      price: 100.0,
+    };
     const product = new Product(
       undefined,
-      "Product 1",
-      "Description 1",
-      100.0,
+      inputData.name,
+      inputData.description,
+      inputData.price,
       expect.any(Date),
       expect.any(Date),
     );
     (mockProductRepository.save as jest.Mock).mockResolvedValue(product);
 
-    const result = await createProductUseCase.execute(
-      "Product 1",
-      "Description 1",
-      100.0,
-    );
+    const result = await createProductUseCase.execute(inputData);
 
     expect(mockProductRepository.save).toHaveBeenCalledWith(product);
     expect(result).toEqual(product);
