@@ -1,7 +1,7 @@
 services:
-  mysql:
+  database:
     image: mysql:8.4.2
-    container_name: base_backend_mysql
+    container_name: base_backend_database
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: base_backend_db

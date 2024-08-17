@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: base_backend_api
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
